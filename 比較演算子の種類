@@ -1,0 +1,27 @@
+・「=」           等しい
+・「>」           より大きい
+・「>=」          以上
+・「<」           より小さい
+・「<=」          以下
+・「<>」,「!=」    等しくない
+・「in」          ある値が値セット内に含まれているかどうか
+・「not in」      値が値セット内に含まれていないかどうか
+・「is null」     値がnull
+・「is not null」 値がnullでない
+・「like」        パターンマッチング(あいまい検索)
+・「between ... and ...」 値が値の範囲内に含まれているか
+
+select * from products;
+select * from products where id = 1;
+select * from products where name = '商品0003';
+select * from products where price > 1000;
+select * from products where price < 1000;
+select * from products where price <> 100;
+select * from products where price != 100;
+select * from products where id in (1,2,3);
+select * from products where id not in (1,2,3);
+select * from products where price is not null;
+select * from products where price is null;
+select * from products where price between 1000 and 1900;
+select * from products where price >= 1000 and price <= 1900;
+select * from products where price = 1000 or price = 2000;

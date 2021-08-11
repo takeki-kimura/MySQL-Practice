@@ -1,0 +1,56 @@
+# SQLとは
+
+・データベース、テーブル、行や列を扱うための言語をSQLと呼ぶ
+・SQLはなんの略でも無いとされるが、SQLの元となったIBMが開発した言語のSEQUEL(Structured English Query Language)が由来とされる
+
+例) 年齢が20歳以上のユーザーをデータベースから取得する
+  - select * from users where age >= 20;
+
+# 標準SQLと、SQLの方言
+
+・「標準SQL」
+  - ISO (国際標準化機構)で定められたSQLのこと
+
+・「SQLの方言」
+  - 各データベース製品で、標準SQLへの対応はまちまち(標準SQLで使える機能が、使えない場合がある)
+  - 各データベース製品でしか、使えない方言(データベース製品独自の書き方)が存在する
+
+・大文字、小文字区分されない
+  - select * from users;
+  - SELECT * FROM USERS;
+  - SELEct * fROm UserS;
+
+  読み易くするために原則統一して書く
+
+・SQL文の最後にセミコロン(;)
+
+例)
+  - select * from users;
+
+・文字と日付はシングルクォーテーションで囲う
+
+例)
+  - select * from users where name = 'Nakamura';
+  - select * from users where created_at >= '2021-01-01 00:00:00';
+
+・単語は半角スペース又は、改行で区切る
+
+【OK】
+  - select * from users;
+
+【OK】
+  - select
+    *
+    from
+    users;
+
+【NG】
+  - select * fromusers;
+
+・SQLは半角で書く 全角で書くとエラー
+
+【OK】半角
+  - select * from users;
+
+【NG】全角
+  - ｓｅｌｅｃｔ　＊　ｆｒｏｍ　ｕｓｅｒｓ；

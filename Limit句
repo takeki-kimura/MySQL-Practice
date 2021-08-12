@@ -1,19 +1,21 @@
-・構文
-  - select 例, ... from テーブル名 limit [オフセット,]最大取得件数;
+# limit句の使い方
 
-・例)
-  1. idが1から10までの 10件の商品データを取得する場合
-  - select * from products limit 10;
+  ・構文
+    - select 例, ... from テーブル名 limit [オフセット,]最大取得件数;
 
-  2. 明示的に初めから10件取得する場合
-  - select * from products limit 0, 10;
+  ・例)
+    1. idが1から10までの 10件の商品データを取得する場合
+    - select * from products limit 10;
 
-  3. idが10からの商品データを10件取得する場合
-  - select * from products limit 10, 10;
+    2. 明示的に初めから10件取得する場合
+    - select * from products limit 0, 10;
 
-・実務使用例
-  ・男性ユーザーの一覧を取得,取得する件数は10件,取得する行はid,last_name,gender  (genderは1が男性、2が女性とする)
-  - select id, last_name, gender from users where gender = 1  limit 10;
+    3. idが10からの商品データを10件取得する場合
+    - select * from products limit 10, 10;
+
+  ・実務使用例
+    ・男性ユーザーの一覧を取得,取得する件数は10件,取得する行はid,last_name,gender  (genderは1が男性、2が女性とする)
+    - select id, last_name, gender from users where gender = 1  limit 10;
 
 
 # 実務補足

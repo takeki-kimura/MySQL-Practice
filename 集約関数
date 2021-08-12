@@ -70,7 +70,7 @@
   ・集約関数におけるnullの扱い
     ・集約関数では、基本的にはnullが無視される
 
-  例)
+  例)データベースにnullがある場合
   ・10
   ・null
   ・20
@@ -102,3 +102,32 @@
 
   ・例2)女性ユーザーが何人いるのか取得する(where句を使う, users.genderが2のユーザーが女性)
     - select count(*) from users where gender = 2;
+
+
+# 応用
+
+  ・2017年1月にアクセスしたユニークユーザー数(ecサイト登録ユーザのみ)を取得
+    ・ここでのユニークアクセスユーザーとは、決まった集計期間内にアクセスしたユーザーの数を表す数値
+    ・あるユーザーAが、決まった期間内に10アクセスしたとしても1と数える
+    ・where句と集約関数count(distinct expr)を組み合わせて使う
+    ・count(distinct espr)の形で、count関数は重複を排除した上で個数を取得できる
+
+      ・例)アクセス履歴
+       user_id :
+       1
+       2
+       1
+       3
+
+       count(distinct user_id)
+       → ユニークユーザー数 3
+
+    ・例)
+    - -- select * from access_logs;
+
+    - select 
+        count(distinct user_id)
+      from
+        access_logs
+      where
+        request_month = '2017-01-01';

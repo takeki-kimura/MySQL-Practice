@@ -1,0 +1,23 @@
+# like句の使い方
+
+・構文
+  - select 列1, ..., from テーブル名 where 列名 like ワイルドカード文字;
+
+# ワイルドカード文字
+
+・ワイルドカード文字で文字列のパターンを指定します
+  1. '%' (パーセント)・・・・0時文字以上の任意の文字列
+  2. '_' (アンダースコア)・・任意の1文字
+
+・例)
+  1. '中%' → '中'で始まる文字列
+  - select * from users where last_name like '中%';
+
+  2. '%中%'→ '中'を含む文字列
+  - select * from users where last_name like '%中%';
+
+  3. '%子' → '子'で終わる文字列
+  - select * from users where first_name like '%子';
+
+  4. '__子'→ 何かしらの2文字から始まり、'子'で終わる文字列
+  - select * from users where first_name like '__子';

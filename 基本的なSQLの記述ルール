@@ -24,9 +24,9 @@
 
  【OK】
   - select
-    *
-    from
-    users;
+  - *
+  - from
+  - users;
 
  【NG】
   - select * fromusers;

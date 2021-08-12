@@ -10,21 +10,21 @@
     - -- select * from orders;
 
     - select
-        *
-      from
-        orders
-      where
-        order_time >= '2017-01-01 00:00:00'
-        and order_time < '2017-02-01 00:00:00';
+    -   *
+    - from
+    -   orders
+    - where
+    -   order_time >= '2017-01-01 00:00:00'
+    -   and order_time < '2017-02-01 00:00:00';
 
   ・例) 1月のデータ(amount)の合計値
     - select
-        sum(amount)
-      from
-        orders
-      where
-        order_time >= '2017-01-01 00:00:00'
-        and order_time < '2017-02-01 00:00:00';
+    -   sum(amount)
+    - from
+    -   orders
+    - where
+    -   order_time >= '2017-01-01 00:00:00'
+    -   and order_time < '2017-02-01 00:00:00';
 
 # 平均値
 

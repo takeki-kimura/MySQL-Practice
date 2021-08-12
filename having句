@@ -1,0 +1,52 @@
+# having句の使い方
+
+  ・where句と同様に、条件に合致する行だけに絞り込める
+  ・having句は、テーブルのデータを集約した結果に対して、条件式を適用する場合に利用する
+
+  ・構文
+    - select
+    -   列1, ...
+    - from
+    -   テーブル名
+    - where
+    -   条件式
+    - group by
+    -   列1, ...
+    - having
+    -   条件式;
+
+      ※ havingは、group byの後に書く
+
+  ・例)ユニークユーザー数が630人以上の月だけ取得 [2017年の1月から2017年の12月までの月別のユニークユーザー数]
+    - select
+    -   request_month,
+    -   count(distinct user_id)
+    - from
+    -   access_logs
+    - where 
+    -   request_month >= '2017-01-01'
+    -   and request_month < '2018-01-01'
+    - group by
+    -   request_month
+    - having
+    -   count(distinct user_id) >= 630;
+
+# 記述順序
+
+  1.select  ・・・取得行(カラム)の指定
+  2.from    ・・・対象テーブルの指定
+  3.where   ・・・絞り込み条件の指定
+  4.group by・・・グループ化の条件を指定
+  5.having  ・・・グループ化した後の絞り込み条件を指定
+  6.order by・・・並び変え条件を指定
+  7.limit   ・・・取得する行数の制限
+
+# 実行順序
+
+  1.from    ・・・対象テーブルの指定
+  2.where   ・・・絞り込み条件の指定
+  3.group by・・・グループ化の条件を指定
+  4.having  ・・・グループ化した後の絞り込み条件を指定
+  5.select  ・・・取得行(カラム)の指定
+  6.order by・・・並び変え条件を指定
+  7.limit   ・・・取得する行数の制限

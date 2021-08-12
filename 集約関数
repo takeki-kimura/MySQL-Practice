@@ -1,0 +1,104 @@
+# 合計値
+
+  ・sum
+  ・構文
+    - sum(expr)
+    ※exprの合計値を返す
+
+  ・例) 1月のデータだけを取得
+
+    - -- select * from orders;
+
+    - select
+        *
+      from
+        orders
+      where
+        order_time >= '2017-01-01 00:00:00'
+        and order_time < '2017-02-01 00:00:00';
+
+  ・例) 1月のデータ(amount)の合計値
+    - select
+        sum(amount)
+      from
+        orders
+      where
+        order_time >= '2017-01-01 00:00:00'
+        and order_time < '2017-02-01 00:00:00';
+
+# 平均値
+
+  ・avg
+  ・構文
+    - avg(expr)
+    ※exprの平均値を返す
+
+・例) 全商品の平均値の取得
+
+  - -- select * from products;
+
+  - select avg(price) from products;
+
+# 最小値
+
+  ・min
+  ・構文
+    - min(expr)
+    ※exprの最小値を返す
+
+  ・例) 全商品価格の最小値
+
+    - select min(price) from products;
+
+# 最大値
+
+  ・max
+  ・構文
+    - max(expr)
+    ※exprの最大値を返す
+
+  ・例) 全商品価格の最大値
+
+    - select max(price) from products;
+
+# null
+
+  ・nullとは
+    ・値が無いことを示す特別な表現
+    ・数値の0でも、長さ0でもなく、値が無い
+
+  ・集約関数におけるnullの扱い
+    ・集約関数では、基本的にはnullが無視される
+
+  例)
+  ・10
+  ・null
+  ・20
+
+    → 平均値avg()は15となる
+    計算式：( 10 + 20 ) / 2
+
+  ・実務補足(null)
+
+    ・可能であれば 値にnullが含まれないようにデータベース構図を設計したほうがトラブルが減る
+    ・nullを許可する場合ゼロとnullの違いやnullと空文字の違いを意識する必要がある
+    ・null代わりに下記は使えないのか検討してみると良い
+      - 数値：0
+      - 文字列：''空文字
+
+# count
+
+  ・count集約関数を使う
+  ・構文
+    - count(expr)
+
+    補足：
+      ・exprの数をカウントする
+      ・count(*)とすると、ユーザーの行数を取得できる
+      ・usersテーブルの行数が、ユーザー数となる
+
+  ・例1)ユーザーが何人いるのか取得する
+    - select count(*) from users;
+
+  ・例2)女性ユーザーが何人いるのか取得する(where句を使う, users.genderが2のユーザーが女性)
+    - select count(*) from users where gender = 2;

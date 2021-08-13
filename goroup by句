@@ -11,7 +11,8 @@
     - group by
     -   列名;
 
-    ・例1)都道府ごとのユーザー数を集計して取得
+    ・例)
+      1. 都道府ごとのユーザー数を集計して取得
       - select
       -   prefecture_id, count(*) 
       - from
@@ -19,7 +20,7 @@
       - group by
       -   prefecture_id;
 
-    ・例2)期間ごとに集計して取得 [2017年の1月から2017年の12月までの月別のユニークユーザー数]
+      2. 期間ごとに集計して取得 [2017年の1月から2017年の12月までの月別のユニークユーザー数]
       - select
       -   request_month,
       -   count(distinct user_id)

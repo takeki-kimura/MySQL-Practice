@@ -5,8 +5,8 @@
     - sum(expr)
     ※exprの合計値を返す
 
-  ・例) 1月のデータだけを取得
-
+  ・例)
+    1. 1月のデータだけを取得
     - -- select * from orders;
 
     - select
@@ -17,7 +17,7 @@
     -   order_time >= '2017-01-01 00:00:00'
     -   and order_time < '2017-02-01 00:00:00';
 
-  ・例) 1月のデータ(amount)の合計値
+    2. 1月のデータ(amount)の合計値
     - select
     -   sum(amount)
     - from
@@ -97,10 +97,11 @@
       ・count(*)とすると、ユーザーの行数を取得できる
       ・usersテーブルの行数が、ユーザー数となる
 
-  ・例1)ユーザーが何人いるのか取得する
+  ・例)
+    1. ユーザーが何人いるのか取得する
     - select count(*) from users;
 
-  ・例2)女性ユーザーが何人いるのか取得する(where句を使う, users.genderが2のユーザーが女性)
+    2. 女性ユーザーが何人いるのか取得する(where句を使う, users.genderが2のユーザーが女性)
     - select count(*) from users where gender = 2;
 
 
@@ -123,7 +124,7 @@
        → ユニークユーザー数 3
 
     ・例)
-    - -- select * from access_logs;
+    - select * from access_logs;
 
     - select 
     -   count(distinct user_id)

@@ -91,3 +91,44 @@
 
   ・例)リスト出力(名前「名字 + さん」, メールアドレス, 女性のみ) ※ 女性はgender=2
     - select concat(last_name, 'さん'), email from users where gender = 2;
+
+#日付と時刻の演算
+
+  • 現在の日付・・・・current date 
+  • 現在の時刻・・・・current time stamp
+  • n日後の日付・・・・d + interval n day
+  • n日前の日付・・・・d - interval n day
+  • x時間後の時刻・・・interval 'x hour'
+  • x時間前の時刻・・・-interval 'x hour'
+  • extract・・・・・日付や時刻の特定の部分(年や月)までを取り出す
+
+    例)
+    1.現在の日付
+    - select current_date();
+
+    2.現在の時刻
+    - select current_timestamp();
+
+    3.n日後の日付
+    - select current_date() + 3;
+    - select current_date() + interval 3 day;
+
+    4.n日前の日付
+    - select current_date() + 3;
+    - select current_date() - interval 3 day;
+
+    5.x時間後の時刻
+    - select current_time() + interval 6 hour;
+
+    6.x時間前の時刻
+    - select current_time() - interval 6 hour;
+
+    7.ordersテーブルから注文日時(order_timeカラム)が、2017年1月のレコードを取得する
+    - select * from orders where extract(year_month from order_time) = 201701;
+    
+    8.ordersテーブルから注文日時(order_timeカラム)が、2017年レコードを取得する
+    - select * from orders where extract(year from order_time) = 2017;
+
+    9.ordersテーブルから注文日時(order_timeカラム)が、1月のレコードを取得する
+    - select * from orders where extract(month from order_time) = 1;
+

@@ -3,7 +3,7 @@
   ・条件を指定してデータを取得する where
 
   ・構文
-    - select 列1,列2 ... from テーブル名 where 条件;　
+    - select 列1,列2 ... from テーブル名 where 条件; 
 
   ・例)
     - select name, price from products where price >= 9800;

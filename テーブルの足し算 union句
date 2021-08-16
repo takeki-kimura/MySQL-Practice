@@ -1,0 +1,52 @@
+# テーブルの足し算 union, union all
+
+• 構文:union
+  - select 列1, … from テーブル1
+  - union select 列2, … from テーブル2
+
+  ・ベースとなるselectの結果に、unionの後に記載したselectの結果を足し算する
+
+  ※ 注意点
+  ・テーブル1とテーブル2で列数を合わせる必要がある
+  ・同じ位置にあるカラムのデータ型は一致している必要がある
+
+
+  ・例）
+   1.ユーザーとアドミンユーザーを足し合わせた一覧を出力(出力する列はe-mail、姓、名、性別を表す数字1,2)
+    - select
+    -   email,
+    -   last_name,
+    -   first_name,
+    -   gender
+    - from
+    -   users
+    - union -- all  
+    - select
+    -   email,
+    -   last_name,
+    -   first_name,
+    -   gender
+    - from
+    -   admin_users;
+
+   2.usersテーブルから男性だけ,admin_usersテーブルからは女性だけ抜き出し、unionした結果を性別だけに並び替える 
+    - select
+    -   email,
+    -   last_name,
+    -   first_name,
+    -   gender
+    - from
+    -   users
+    - where 
+    -   gender = 1
+    - union -- all  
+    - select
+    -   email,
+    -   last_name,
+    -   first_name,
+    -   gender
+    - from
+    -   admin_users
+    - where 
+    -   gender = 2
+    - order by gender;

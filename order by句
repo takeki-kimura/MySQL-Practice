@@ -20,7 +20,7 @@
     - select * from users order by birthday, prefecture_id;
 
 
-  ・order byで並び順を指定しない場合
+  • order byで並び順を指定しない場合
     ・どんな並び順になるかわからない
     ・規則性があるように見えるが、将来のバージョンアップで同じ並び順になる事は保証されていない
 
@@ -35,7 +35,7 @@
     - select * from products order by price desc, id asc;
     - select * from products order by price desc, id;
 
-    ・日本語の商品名並び替え
+    • 日本語の商品名並び替え
       ・商品名で並び替えたいとなった時、アルファベットの商品であれば、アルファベット順に並び変わる
       ・日本語(全角文字)については、文字コード順になるので、期待通り並び替えられないため、工夫が必要
       ・代替案はヨミガナ入れる列を新規に作って、それを使って並び替える（検証が必要)

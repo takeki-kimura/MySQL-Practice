@@ -13,5 +13,5 @@
   ・max(expr)・・・最大値
   ・count(expr)・・行数
 
-  ・expr・・・expression,  日本語訳：式
+  • expr・・・expression,  日本語訳：式
     exprの部分は引数(ひきすう,parameter)と呼ばれ、呼び出しごとに異なる値を関数に渡すために使用される

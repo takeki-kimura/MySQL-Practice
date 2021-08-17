@@ -1,0 +1,78 @@
+# 条件分岐
+  • case式とは
+    ・case式を使うと SQL で場合分けを記述することができ
+    ・場合分けのことを条件分岐という
+  
+  • 成績表を例にとると
+  - 点数90点以上だったら、Aと出力
+  - 点数70点以上だったら、Bと出力
+  - 点数60点以上だったら、Cと出力
+  - 点数60点未満だったら、Dと出力
+
+  ・構文
+   - case
+   -   when 条件式1 then 値1       ・・・条件式1がtrue(真)ならば値1
+   -   [when 条件式2 then 値2 ...] ・・・条件式2がtrue(真)ならば値2
+   -   [else 値3]                 ・・・どれにも当てはまらなければ値3
+   - end
+
+   ※ [ ]の部分は省略可能
+   ※ 最後のendは省略不可
+
+  ・具体例
+   - case
+   -   when x >= 10 then 'A'
+   -   when x >= 5 then 'B'
+   -   else 'C'
+   - end
+
+   ※ xは変数
+
+
+  ・変数xが10の場合
+   - case
+   -   when x >= 10 then 'A' ←①適用(条件が成り立つため)
+   -   when x >= 5 then 'B'  ←②パス
+   -   else 'C' ←③パス
+   - end
+
+    →case式の結果は、'A'
+    ※ case式では、最初に条件に合致したブロックだけが実行される
+
+  ・変数xが5の場合
+   - case
+   -   when x >= 10 then 'A' ←①パス(条件が成り立たないため)
+   -   when x >= 5 then 'B'  ←②適用(条件が成り立つため)
+   -   else 'C' ←③パス
+   - end
+
+    →case式の結果は、'B'
+
+  ・変数xが4の場合
+   - case
+   -   when x >= 10 then 'A' ←①パス(条件が成り立たないため)
+   -   when x >= 5 then 'B'  ←②パス(条件が成り立たないため)
+   -   else 'C' ←③適用
+   - end
+
+    →case式の結果は、'C'
+
+
+・例)
+  1.ユーザーを累計注文回数でランク分けして、ランクが高い順に並び替える
+   (A 5回以上,B 2回以上,C 2回未満,注文回数0回のユーザーは出力不要要、必要情報はユーザーid、累計注文回数、ユーザーランクA,B,C)
+  - select
+  -   u.id user_id,
+  -   count(*) num,
+  -   case
+  -     when count(*) >= 5 then 'A'
+  -     when count(*) >= 2 then 'B'
+  -     else 'C'
+  -   end user_rank
+  - from
+  -   users u
+  - inner join
+  -   orders o
+  - on u.id = o.user_id
+  - group by u.id
+  - order by user_rank ;

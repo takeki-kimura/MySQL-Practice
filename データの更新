@@ -57,3 +57,80 @@
 
   ・例)商品id 3の商品名をSQL入門に、価格を1000に変える
    - update products set name = 'SQL入門1', price = 1000 where id = 3;
+
+#「更新条件にサブクエリを使う」
+
+  ・例)累計販売数が10を超えている商品については価格を5%UPする
+   - select
+   -   product_id,
+   -   sum(product_qty)
+   - from
+   -   order_details
+   - group by
+   -   product_id
+   - having
+   -   sum(product_qty) >= 10;
+
+   - update
+   -   products
+   - set
+   -   price = price * 1.05
+   - where
+   -   id in
+   -   (
+   -   select
+   - product_id
+   - from
+   -   order_details
+   - group by
+   -   product_id
+   - having
+   -   sum(product_qty) >= 10
+   -   );
+
+#「行の削除」
+  ・構文
+   - delete from テーブル名 [where 削除条件];
+
+  ・例)商品に割り振られている商品カテゴリを使うのをやめるので、商品とカテゴリのひも付きを削除する
+    • ポイント
+    ・行を削除するdelete文を使う
+    ・商品(products)とカテゴリ(categories)を紐付けている中間テーブルの、products_categoriesのデータを全て削除
+
+   - select * from products_categories;
+   - delete from products_categories;
+
+   ※ deleteで削除したデータは、基本的には元に戻せない
+   ※ 大量のデータをdeleteする時に予想外に時間が掛かる場合がある(10万件あたりから注意)
+
+  • 条件を指定して行を削除
+  ・例)商品ID1001は間違いで登録してしまったものなので削除する
+   - delete from products where id = 1001;
+
+    ※ where句を指定し忘れると、productsテーブル全体が削除対象となる
+
+  • 削除条件にサブクエリを使う
+   ※ MySQL,PostgreSQL,Oracle,SQL Serverでは使用可能
+   ※ DB2では使えない
+  
+  ・例)1個も売れてない商品は売るのをやめるので削除する
+   - select
+   -   product_id
+   - from
+   -   order_details
+   - group by
+   -   product_id;
+   
+   - delete
+   - from
+   -   products
+   - where
+   -   id not in
+   -     (
+   -     select
+   -       product_id
+   -     from
+   -       order_details
+   -     group by
+   -       product_id
+   -     );

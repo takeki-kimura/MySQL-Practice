@@ -7,10 +7,10 @@
 # サブクエリを使うと
   ・日々の業務改善のデータ分析に役立つデータが、データベースから直接SQLで取り出せる
   ・例）
-    - 全商品の平均単価より、高い商品を取得
-    - 商品別の平均販売数よりも、多く売れている日を取得
-    - 商品カテゴリごとに、平均単価を取得
-    - 2017年12月に、商品を購入して"いない"、ユーザーを取得
+   - 全商品の平均単価より、高い商品を取得
+   - 商品別の平均販売数よりも、多く売れている日を取得
+   - 商品カテゴリごとに、平均単価を取得
+   - 2017年12月に、商品を購入して"いない"、ユーザーを取得
 
 # サブクエリ(where句)
   ・構文
@@ -24,36 +24,36 @@
   ・例）
     1.2017年12月に商品を購入していないユーザーの一覧を取得 (必要な情報はユーザーid、名字、email)
       ※ ポイント - サブクエリとnot in演算子を利用する
-    - select
-    -   id,
-    -   last_name,
-    -   email
-    - from
-    -   users
-    - where id not in(
-    -   select
-    -     user_id
-    -   from
-    -     orders
-    -   where
-    -     order_time >= '2017-12-01 00:00:00'
-    -     and order_time < '2018-01-01 00:00:00');
+     - select
+     -   id,
+     -   last_name,
+     -   email
+     - from
+     -   users
+     - where id not in(
+     -   select
+     -     user_id
+     -   from
+     -     orders
+     -   where
+     -     order_time >= '2017-12-01 00:00:00'
+     -     and order_time < '2018-01-01 00:00:00');
 
     2.2017年12月に商品を購入したユーザーの一覧を取得 (必要な情報はユーザー、id名字、mail)
-    - select
-    -   id,
-    -   last_name,
-    -   email
-    - from
-    -   users
-    - where id in( 
-    -   select
-    -     user_id
-    -   from
-    -     orders
-    -   where
-    -     order_time >= '2017-12-01 00:00:00'
-    -     and order_time < '2018-01-01 00:00:00');
+     - select
+     -   id,
+     -   last_name,
+     -   email
+     - from
+     -   users
+     - where id in( 
+     -   select
+     -     user_id
+     -   from
+     -     orders
+     -   where
+     -     order_time >= '2017-12-01 00:00:00'
+     -     and order_time < '2018-01-01 00:00:00');
 
 # スカラ・サブクエリ
   • スカラ・サブクエリ
@@ -66,17 +66,17 @@
   • 応用例
   ・全商品の平均単価より、高い商品を取得 (商品単価の高い順に並び替え、商品単価が同じ時は登録順(id昇順)に並べ替える)
     ※ ポイント スカラ・サブクエリを使う
-    - select
-    -   * 
-    - from
-    -   products
-    - where 
-    -   price > 
-    -     (
-    -       select 
-    -         avg(price)
-    -       from
-    -         products
-    -     )
-    - order by
-    -   price desc, id asc;
+   - select
+   -   * 
+   - from
+   -   products
+   - where 
+   -   price > 
+   -     (
+   -       select 
+   -         avg(price)
+   -       from
+   -         products
+   -     )
+   - order by
+   -   price desc, id asc;

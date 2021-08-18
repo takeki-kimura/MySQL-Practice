@@ -5,14 +5,14 @@
 
   • inner joinの使い方
   ・構文:内部結合 inner join(joinのみでも可)
-    - select
-    -   テーブル名1.列名,
-    -   テーブル名2.列名 ...
-    - from
-    -   テーブル名1
-    - inner join
-    -   テーブル名2
-    - on テーブル名1.列名 = テーブル名2.列名;
+   - select
+   -   テーブル名1.列名,
+   -   テーブル名2.列名 ...
+   - from
+   -   テーブル名1
+   - inner join
+   -   テーブル名2
+   - on テーブル名1.列名 = テーブル名2.列名;
 
   例)
   1.ユーザーの一覧を取得(都道府県名も表示,必要な列はユーザーID，名字，名前，都道府県名)
@@ -66,36 +66,36 @@
 # 応用例
 
   1.2017年1月の東京都に住むユーザーの注文情報一覧を取得 (取得するカラムは注文id、注文日時、注文金額合計、ユーザーid、苗字、名前)
-    - select 
-    -   o.id order_id,
-    -   o.order_time order_time,
-    -   o.amount amount,
-    -   u.id user_id,
-    -   u.last_name last_name,
-    -   u.first_name first_name
-    - from
-    -   orders o
-    - inner join
-    -   users u
-    - on o.user_id = u.id
-    - where 
-    -   u.prefecture_id = 13
-    -   and o.order_time >= '2017-01-01 00:00:00'
-    -   and o.order_time < '2017-02-01 00:00:00'
-    - order by order_id;
+   - select 
+   -   o.id order_id,
+   -   o.order_time order_time,
+   -   o.amount amount,
+   -   u.id user_id,
+   -   u.last_name last_name,
+   -   u.first_name first_name
+   - from
+   -   orders o
+   - inner join
+   -   users u
+   - on o.user_id = u.id
+   - where 
+   -   u.prefecture_id = 13
+   -   and o.order_time >= '2017-01-01 00:00:00'
+   -   and o.order_time < '2017-02-01 00:00:00'
+   - order by order_id;
 
   2.商品idが3に紐付く商品カテゴリ名を全て取得(必要な情報は商品id,商品名,カテゴリ名)
-    - select
-    -   p.id product_id,
-    -   p.name product_name,
-    -   c.name category_name
-    - from
-    -   products p
-    - inner join 
-    -   products_categories pc
-    -   on p.id = pc.product_id
-    - inner join 
-    -   categories c
-    -   on pc.category_id = c.id
-    - where
-    -   p.id = 3;
+   - select
+   -   p.id product_id,
+   -   p.name product_name,
+   -   c.name category_name
+   - from
+   -   products p
+   - inner join 
+   -   products_categories pc
+   -   on p.id = pc.product_id
+   - inner join 
+   -   categories c
+   -   on pc.category_id = c.id
+   - where
+   -   p.id = 3;

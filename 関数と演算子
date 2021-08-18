@@ -57,13 +57,13 @@
   
   例)
   1. 10の絶対値
-    - select abs(10);
+   - select abs(10);
 
   2. -10の絶対値
-    - select abs(-10);
+   - select abs(-10);
 
   3. 0の絶対値
-    - select abs(0);
+   - select abs(0);
 
 # 四捨五入(round)
 
@@ -71,15 +71,15 @@
    - round(対象の数値, 丸めの行数)  ※ 丸めるとは、四捨五入や切捨てなどで数値を所定の桁数に収めることを表す
 
     ・丸めの桁数を0に指定すると小数第1位で四捨五入  round(10.555, 0)
-      - select round(10.555, 0);
+     - select round(10.555, 0);
         → 11
 
     ・丸めの桁数を1に指定すると小数第2位で四捨五入  round(10.555, 1)
-      - select round(10.555, 1);
+     - select round(10.555, 1);
         → 10.6
 
     ・丸めの桁数に2を指定すると小数第3位で四捨五入  round(10.555, 2)
-      - select round(10.555, 2);
+     - select round(10.555, 2);
         → 10.56
 
   ・例)商品価格一覧を作成するときに税込価格を出力(ただし少数第1位で四捨五入して出力)
@@ -104,31 +104,31 @@
 
     例)
     1.現在の日付
-    - select current_date();
+     - select current_date();
 
     2.現在の時刻
-    - select current_timestamp();
+     - select current_timestamp();
 
     3.n日後の日付
-    - select current_date() + 3;
-    - select current_date() + interval 3 day;
+     - select current_date() + 3;
+     - select current_date() + interval 3 day;
 
     4.n日前の日付
-    - select current_date() + 3;
-    - select current_date() - interval 3 day;
+     - select current_date() + 3;
+     - select current_date() - interval 3 day;
 
     5.x時間後の時刻
-    - select current_time() + interval 6 hour;
+     - select current_time() + interval 6 hour;
 
     6.x時間前の時刻
-    - select current_time() - interval 6 hour;
+     - select current_time() - interval 6 hour;
 
     7.ordersテーブルから注文日時(order_timeカラム)が、2017年1月のレコードを取得する
-    - select * from orders where extract(year_month from order_time) = 201701;
+     - select * from orders where extract(year_month from order_time) = 201701;
     
     8.ordersテーブルから注文日時(order_timeカラム)が、2017年レコードを取得する
-    - select * from orders where extract(year from order_time) = 2017;
+     - select * from orders where extract(year from order_time) = 2017;
 
     9.ordersテーブルから注文日時(order_timeカラム)が、1月のレコードを取得する
-    - select * from orders where extract(month from order_time) = 1;
+     - select * from orders where extract(month from order_time) = 1;
 

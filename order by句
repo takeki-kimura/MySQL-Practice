@@ -1,7 +1,7 @@
 # order by句の使い方
 
   ・構文
-    - order by 列名や式 並び順, ...
+   - order by 列名や式 並び順, ...
 
   ・並び順の指定
     - asc ・・・昇順(ascending) ※ デフォルト。並び順を指定しない場合ascになる
@@ -9,20 +9,20 @@
 
   ・例)
     1. 全商品の価格の高い順
-    - select * from products order by price desc;
+     - select * from products order by price desc;
 
     2. 全商品の価格の低い順
-    - select * from products order by price asc;
-    - select * from products order by price ;
+     - select * from products order by price asc;
+     - select * from products order by price ;
 
     3. 生年月日が古い順にユーザーの一覧を取得(生年月日が一緒の場合は都道府県 ID 順（昇順）にする)
-    - select * from users order by birthday asc, prefecture_id asc;
-    - select * from users order by birthday, prefecture_id;
+     - select * from users order by birthday asc, prefecture_id asc;
+     - select * from users order by birthday, prefecture_id;
 
 
   • order byで並び順を指定しない場合
-    ・どんな並び順になるかわからない
-    ・規則性があるように見えるが、将来のバージョンアップで同じ並び順になる事は保証されていない
+  ・どんな並び順になるかわからない
+  ・規則性があるように見えるが、将来のバージョンアップで同じ並び順になる事は保証されていない
 
       →取得するレコードの並び順が重要な場合はorder byを使って明示的に並び順を指定するようにする
 
@@ -30,12 +30,11 @@
   ・order byには、カンマ区切りで複数の並び替え条件を指定できる
   ・登録順で取得したい場合はid昇順で並び替える
 
-  ・例)
-    1. 全商品の価格の高い順、同額の場合登録順にする(登録順 products.idが小さい順)
-    - select * from products order by price desc, id asc;
-    - select * from products order by price desc, id;
+  ・例)全商品の価格の高い順、同額の場合登録順にする(登録順 products.idが小さい順)
+   - select * from products order by price desc, id asc;
+   - select * from products order by price desc, id;
 
     • 日本語の商品名並び替え
-      ・商品名で並び替えたいとなった時、アルファベットの商品であれば、アルファベット順に並び変わる
-      ・日本語(全角文字)については、文字コード順になるので、期待通り並び替えられないため、工夫が必要
-      ・代替案はヨミガナ入れる列を新規に作って、それを使って並び替える（検証が必要)
+    ・商品名で並び替えたいとなった時、アルファベットの商品であれば、アルファベット順に並び変わる
+    ・日本語(全角文字)については、文字コード順になるので、期待通り並び替えられないため、工夫が必要
+    ・代替案はヨミガナ入れる列を新規に作って、それを使って並び替える（検証が必要)

@@ -39,35 +39,35 @@
 
 # viewの作成
   ・構文
-    - create view view名 (<viewの列名1>,<viewの列名2>, … ) 
-    - as
-    - <select文>
+   - create view view名 (<viewの列名1>,<viewの列名2>, … ) 
+   - as
+   - <select文>
 
   ・例)
     1.都道府県別のユーザーを取得する (select文をviewにする)
-    - create view prefecture_user_counts(name,count)
-    - as
-    - select
-    -   p.name name,
-    -   count(*) count
-    - from
-    -   users u
-    - inner join
-    -   prefectures p
-    -   on u.prefecture_id = p.id
-    -  group by 
-    -   u.prefecture_id;
+     - create view prefecture_user_counts(name,count)
+     - as
+     - select
+     -   p.name name,
+     -   count(*) count
+     - from
+     -   users u
+     - inner join
+     -   prefectures p
+     -   on u.prefecture_id = p.id
+     -  group by 
+     -   u.prefecture_id;
 
     2.上記で作成したviewを使用してデータを取得する
-    - select
-    -   name,
-    -   count
-    - from
-    -   prefecture_user_counts;
+     - select
+     -   name,
+     -   count
+     - from
+     -   prefecture_user_counts;
 
 # viewの削除
   ・構文
-    - drop view view名
+   - drop view view名
   
   ・例）
-    - drop view prefecture_user_counts;
+   - drop view prefecture_user_counts;

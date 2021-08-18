@@ -61,61 +61,61 @@
   ・例)
     1.ユーザーを累計注文回数でランク分けして、ランクが高い順に並び替える
       (A 5回以上,B 2回以上,C 2回未満,注文回数0回のユーザーは出力不要要、必要情報はユーザーid、累計注文回数、ユーザーランクA,B,C)
-    - select
-    -   u.id user_id,
-    -   count(*) num,
-    -   case
-    -     when count(*) >= 5 then 'A'
-    -     when count(*) >= 2 then 'B'
-    -     else 'C'
-    -   end user_rank
-    - from
-    -   users u
-    - inner join
-    -   orders o
-    - on u.id = o.user_id
-    - group by u.id
-    - order by user_rank;
+     - select
+     -   u.id user_id,
+     -   count(*) num,
+     -   case
+     -     when count(*) >= 5 then 'A'
+     -     when count(*) >= 2 then 'B'
+     -     else 'C'
+     -   end user_rank
+     - from
+     -   users u
+     - inner join
+     -   orders o
+     - on u.id = o.user_id
+     - group by u.id
+     - order by user_rank;
 
     2.全商品を累計販売個数でランク分けして取得
     (A 20個以上,B 10個以上,C 10個未満,ランクが高い順に並び替える 必要な列は商品、ID、商品名、販売個数、ランクAまたはBまたはC)
     ・求め方の手順
-    1.商品一覧を出力 
-    2.商品一覧に注文詳細(order_details)を結合(left outer join)
-    3.商品ごとの販売数を求める(group byとsum集約関数でproduct_qtyを集計)
-    4.caseを使って販売個数ごとにランクを決定する 
-    5.ランクが高い順(A,B,C)に並び替える(order by)
+     1.商品一覧を出力 
+     2.商品一覧に注文詳細(order_details)を結合(left outer join)
+     3.商品ごとの販売数を求める(group byとsum集約関数でproduct_qtyを集計)
+     4.caseを使って販売個数ごとにランクを決定する 
+     5.ランクが高い順(A,B,C)に並び替える(order by)
 
-    - select
-    - p.id,
-    -   p.name,
-    -   sum(product_qty),
-    -   case
-    -     when sum(product_qty) >= 20 then 'A'
-    -     when sum(product_qty) >= 10 then 'B'
-    -    else 'C'
-    -   end product_rank
-    - from
-    -   products p
-    - left outer join
-    -   order_details od
-    -   on p.id = od.product_id
-    - group by p.id
-    - order by product_rank;
+     - select
+     - p.id,
+     -   p.name,
+     -   sum(product_qty),
+     -   case
+     -     when sum(product_qty) >= 20 then 'A'
+     -     when sum(product_qty) >= 10 then 'B'
+     -    else 'C'
+     -   end product_rank
+     - from
+     -   products p
+     - left outer join
+     -   order_details od
+     -   on p.id = od.product_id
+     - group by p.id
+     - order by product_rank;
 
 
 # 取得値nullを0に置き換える
   ・例)
-    - select
-    -   p.id,
-    -   p.name,
-    -   case
-    -     when sum(od.product_qty) is null then 0
-    -     else sum(od.product_qty)
-    -   end num
-    - from
-    -   products p
-    - left outer join
-    -   order_details od
-    - on p.id = od.product_id
-    - group by p.id;
+   - select
+   -   p.id,
+   -   p.name,
+   -   case
+   -     when sum(od.product_qty) is null then 0
+   -     else sum(od.product_qty)
+   -   end num
+   - from
+   -   products p
+   - left outer join
+   -   order_details od
+   - on p.id = od.product_id
+   - group by p.id;

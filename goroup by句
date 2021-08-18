@@ -4,30 +4,30 @@
   ・group byで指定する列名によって、グループ化される
 
   ・構文
-    - select
-    -   列名
-    - from
-    -   テーブル名
-    - group by
-    -   列名;
+   - select
+   -   列名
+   - from
+   -   テーブル名
+   - group by
+   -   列名;
 
     ・例)
       1. 都道府ごとのユーザー数を集計して取得
-      - select
-      -   prefecture_id, count(*) 
-      - from
-      -   users 
-      - group by
-      -   prefecture_id;
+       - select
+       -   prefecture_id, count(*) 
+       - from
+       -   users 
+       - group by
+       -   prefecture_id;
 
       2. 期間ごとに集計して取得 [2017年の1月から2017年の12月までの月別のユニークユーザー数]
-      - select
-      -   request_month,
-      -   count(distinct user_id)
-      - from
-      -   access_logs
-      - where 
-      -   request_month >= '2017-01-01'
-      -   and request_month < '2018-01-01'
-      - group by
-      -   request_month;
+       - select
+       -   request_month,
+       -   count(distinct user_id)
+       - from
+       -   access_logs
+       - where 
+       -   request_month >= '2017-01-01'
+       -   and request_month < '2018-01-01'
+       - group by
+       -   request_month;

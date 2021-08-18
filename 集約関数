@@ -7,24 +7,24 @@
 
   ・例)
     1. 1月のデータだけを取得
-    - -- select * from orders;
+     - -- select * from orders;
 
-    - select
-    -   *
-    - from
-    -   orders
-    - where
-    -   order_time >= '2017-01-01 00:00:00'
-    -   and order_time < '2017-02-01 00:00:00';
+     - select
+     -   *
+     - from
+     -   orders
+     - where
+     -   order_time >= '2017-01-01 00:00:00'
+     -   and order_time < '2017-02-01 00:00:00';
 
     2. 1月のデータ(amount)の合計値
-    - select
-    -   sum(amount)
-    - from
-    -   orders
-    - where
-    -   order_time >= '2017-01-01 00:00:00'
-    -   and order_time < '2017-02-01 00:00:00';
+     - select
+     -   sum(amount)
+     - from
+     -   orders
+     - where
+     -   order_time >= '2017-01-01 00:00:00'
+     -   and order_time < '2017-02-01 00:00:00';
 
 # 平均値
 
@@ -43,12 +43,11 @@
 
   ・min
   ・構文
-    - min(expr)
-    ※exprの最小値を返す
+   - min(expr)
+   ※ exprの最小値を返す
 
   ・例) 全商品価格の最小値
-
-    - select min(price) from products;
+   - select min(price) from products;
 
 # 最大値
 
@@ -58,17 +57,16 @@
     ※exprの最大値を返す
 
   ・例) 全商品価格の最大値
-
-    - select max(price) from products;
+   - select max(price) from products;
 
 # null
 
   • nullとは
-    ・値が無いことを示す特別な表現
-    ・数値の0でも、長さ0でもなく、値が無い
+  ・値が無いことを示す特別な表現
+  ・数値の0でも、長さ0でもなく、値が無い
 
   • 集約関数におけるnullの扱い
-    ・集約関数では、基本的にはnullが無視される
+  ・集約関数では、基本的にはnullが無視される
 
   例)データベースにnullがある場合
   ・10
@@ -79,18 +77,17 @@
     計算式：( 10 + 20 ) / 2
 
   • 実務補足(null)
-
-    ・可能であれば 値にnullが含まれないようにデータベース構図を設計したほうがトラブルが減る
-    ・nullを許可する場合ゼロとnullの違いやnullと空文字の違いを意識する必要がある
-    ・null代わりに下記は使えないのか検討してみると良い
-      - 数値：0
-      - 文字列：''空文字
+  ・可能であれば 値にnullが含まれないようにデータベース構図を設計したほうがトラブルが減る
+  ・nullを許可する場合ゼロとnullの違いやnullと空文字の違いを意識する必要がある
+  ・null代わりに下記は使えないのか検討してみると良い
+    - 数値：0
+    - 文字列：''空文字
 
 # count
 
   ・count集約関数を使う
   ・構文
-    - count(expr)
+   - count(expr)
 
     補足：
       ・exprの数をカウントする
@@ -108,27 +105,27 @@
 # 応用
 
   • 2017年1月にアクセスしたユニークユーザー数(ecサイト登録ユーザのみ)を取得
-    ・ここでのユニークアクセスユーザーとは、決まった集計期間内にアクセスしたユーザーの数を表す数値
-    ・あるユーザーAが、決まった期間内に10アクセスしたとしても1と数える
-    ・where句と集約関数count(distinct expr)を組み合わせて使う
-    ・count(distinct espr)の形で、count関数は重複を排除した上で個数を取得できる
+  ・ここでのユニークアクセスユーザーとは、決まった集計期間内にアクセスしたユーザーの数を表す数値
+  ・あるユーザーAが、決まった期間内に10アクセスしたとしても1と数える
+  ・where句と集約関数count(distinct expr)を組み合わせて使う
+  ・count(distinct espr)の形で、count関数は重複を排除した上で個数を取得できる
 
-      ・例)アクセス履歴
-       user_id :
-       1
-       2
-       1
-       3
+    ・例)アクセス履歴
+      user_id :
+      1
+      2
+      1
+      3
 
-       count(distinct user_id)
-       → ユニークユーザー数 3
+      count(distinct user_id)
+      → ユニークユーザー数 3
 
-    ・例)
-    - select * from access_logs;
+  ・例)
+   - select * from access_logs;
 
-    - select 
-    -   count(distinct user_id)
-    - from
-    -   access_logs
-    - where
-    -   request_month = '2017-01-01';
+   - select 
+   -   count(distinct user_id)
+   - from
+   -   access_logs
+   - where
+   -   request_month = '2017-01-01';

@@ -1,0 +1,121 @@
+# 条件分岐
+  • case式とは
+    ・case式を使うと SQL で場合分けを記述することができ
+    ・場合分けのことを条件分岐という
+  
+  • 成績表を例にとると
+  - 点数90点以上だったら、Aと出力
+  - 点数70点以上だったら、Bと出力
+  - 点数60点以上だったら、Cと出力
+  - 点数60点未満だったら、Dと出力
+
+  ・構文
+   - case
+   -   when 条件式1 then 値1       ・・・条件式1がtrue(真)ならば値1
+   -   [when 条件式2 then 値2 ...] ・・・条件式2がtrue(真)ならば値2
+   -   [else 値3]                 ・・・どれにも当てはまらなければ値3
+   - end
+
+   ※ [ ]の部分は省略可能
+   ※ 最後のendは省略不可
+
+  ・具体例
+   - case
+   -   when x >= 10 then 'A'
+   -   when x >= 5 then 'B'
+   -   else 'C'
+   - end
+
+   ※ xは変数
+
+
+  ・変数xが10の場合
+   - case
+   -   when x >= 10 then 'A' ←①適用(条件が成り立つため)
+   -   when x >= 5 then 'B'  ←②パス
+   -   else 'C' ←③パス
+   - end
+
+    →case式の結果は、'A'
+    ※ case式では、最初に条件に合致したブロックだけが実行される
+
+  ・変数xが5の場合
+   - case
+   -   when x >= 10 then 'A' ←①パス(条件が成り立たないため)
+   -   when x >= 5 then 'B'  ←②適用(条件が成り立つため)
+   -   else 'C' ←③パス
+   - end
+
+    →case式の結果は、'B'
+
+  ・変数xが4の場合
+   - case
+   -   when x >= 10 then 'A' ←①パス(条件が成り立たないため)
+   -   when x >= 5 then 'B'  ←②パス(条件が成り立たないため)
+   -   else 'C' ←③適用
+   - end
+
+    →case式の結果は、'C'
+
+
+  ・例)
+    1.ユーザーを累計注文回数でランク分けして、ランクが高い順に並び替える
+      (A 5回以上,B 2回以上,C 2回未満,注文回数0回のユーザーは出力不要要、必要情報はユーザーid、累計注文回数、ユーザーランクA,B,C)
+    - select
+    -   u.id user_id,
+    -   count(*) num,
+    -   case
+    -     when count(*) >= 5 then 'A'
+    -     when count(*) >= 2 then 'B'
+    -     else 'C'
+    -   end user_rank
+    - from
+    -   users u
+    - inner join
+    -   orders o
+    - on u.id = o.user_id
+    - group by u.id
+    - order by user_rank;
+
+    2.全商品を累計販売個数でランク分けして取得
+    (A 20個以上,B 10個以上,C 10個未満,ランクが高い順に並び替える 必要な列は商品、ID、商品名、販売個数、ランクAまたはBまたはC)
+    ・求め方の手順
+    1.商品一覧を出力 
+    2.商品一覧に注文詳細(order_details)を結合(left outer join)
+    3.商品ごとの販売数を求める(group byとsum集約関数でproduct_qtyを集計)
+    4.caseを使って販売個数ごとにランクを決定する 
+    5.ランクが高い順(A,B,C)に並び替える(order by)
+
+    - select
+    - p.id,
+    -   p.name,
+    -   sum(product_qty),
+    -   case
+    -     when sum(product_qty) >= 20 then 'A'
+    -     when sum(product_qty) >= 10 then 'B'
+    -    else 'C'
+    -   end product_rank
+    - from
+    -   products p
+    - left outer join
+    -   order_details od
+    -   on p.id = od.product_id
+    - group by p.id
+    - order by product_rank;
+
+
+# 取得値nullを0に置き換える
+  ・例)
+    - select
+    -   p.id,
+    -   p.name,
+    -   case
+    -     when sum(od.product_qty) is null then 0
+    -     else sum(od.product_qty)
+    -   end num
+    - from
+    -   products p
+    - left outer join
+    -   order_details od
+    - on p.id = od.product_id
+    - group by p.id;

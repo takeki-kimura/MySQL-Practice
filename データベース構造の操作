@@ -1,0 +1,91 @@
+# データベースの追加
+  ・構文
+   - create database データベース名;
+
+  ・例）"book_store"という名前のデータベースを作成する
+   - create database book_store;
+
+# 命名ルール
+  ・データベースオブジェクト(データベース名、テーブル名、列名)
+  ・ルールに従わないとえらーになる
+
+  • データベースオブジェクトに使って良い文字列
+  ・半角のアルファベット・・・a,b,c,...
+  ・半角の数字        ・・・0,1,2,...
+  ・アンダースコア     ・・・ _
+   
+   ※ 名前の最初は半角のアルファベットとする
+
+  • 具体例
+  ・◯ users
+  ・◯ mydb2
+  ・◯ products_categories
+  ・x _users
+  ・x 1users
+
+   ※ mydb2やmydb3等、付けた人しか意味がわからない数字はマジックナンバーと呼ばれて、実務では避ける傾向がある 
+   ※ エラーにはならない
+
+# テーブルの追加
+
+  ・例)"books"という名前のテーブルを作成する
+   - create table books(id int not null auto_increment primary key, title varchar(255) not null);
+
+  • 上記SQL解説
+  ・列名id
+    - int            : 整数方
+    - not null       : nullを許可しない
+    - auto_increment : idを自動的にふる
+    - primary key    : 主キーの設定
+
+  ・列名title
+    - varchar(255)   : 最大255文字の可変長文字列方
+    - not null       : nullを許可しない
+
+# テーブル構造の変更
+   1.列の追加("books"テーブルに価格を管理する列を追加、列名は"price",データ型は"int"として追加)
+   ・構文
+    - alter table テーブル名 add 列名 データ型 初期値;
+
+    ・例)
+     - alter table books add price int after id;
+
+   2.列名の変更(列名"price"を"unit_price"に変更)
+   ・構文
+    - alter table テーブル名 change 旧列名 新列名 データ型;
+
+    ・例)
+     - alter table books change price unit_price int;
+
+   3.列の削除("books"テーブルから列"unit_price"を削除)
+   ・構文
+    - alter table テーブル名 drop 列名;
+
+    ・例)
+     - alter table books drop unit_price;
+
+# テーブルの削除
+
+  ・構文
+   - drop table テーブル名;
+
+  ・例)
+   - drop table books;
+
+# データベースの削除
+
+  ・構文
+   - drop database データベース名;
+
+  ・例)
+   - drop database book_store;
+
+# 操作の注意点
+
+  • 注意事項：alter table, drop table, drop database等
+  
+  ・操作は基本的には取り消せない
+   - 実務において本番環境を操作するときはサービスをメンテナンスモードにして、バックアップを取ってからalter tableなどを実行するのが安全
+
+  ・想定外に時間がかかりシステムトラブルになる場合がある
+   - テスト環境でalter tableなどのテストをして、問題点を洗い出してから本番環境で実行する事が推奨される
